@@ -1,4 +1,3 @@
-
 class GCDCalculator:
     """
     A class to calculate the Greatest Common Divisor (GCD) of two positive integers
@@ -6,9 +5,12 @@ class GCDCalculator:
     """
 
     def __init__(self) -> None:
-         """ Initialize the GCDCalculator object. """
-         pass
-    def get_GCD(self, a: int, b: int):
+        """Initialize the GCDCalculator object."""
+        pass
+
+    # Make the function static so that you can access it without creating an object
+    @staticmethod
+    def get_GCD( a: int, b: int):
         """
         Calculate the GCD of two positive integers using the Euclidean Algorithm.
 
@@ -22,6 +24,9 @@ class GCDCalculator:
         Raises:
             ValueError: If either a or b is not a positive integer.
         """
+        # Check if a and b are positive integers
+        if a < 0 or b < 0:
+            raise ValueError("Both inputs must be positive integers.")
 
         # If the second number is 0, the GCD is the first number.
         if b == 0:
@@ -31,18 +36,21 @@ class GCDCalculator:
         remainder = a % b
 
         # Recursively call the function with the second number and the remainder until the second number is 0.
-        return self.get_GCD(a, remainder)
+        return GCDCalculator.get_GCD(b, remainder)
 
 
+while True:
+    try:
+        # Ask the user for input
+        a = int(input("Enter the first positive integer (or 'q' to quit): "))
+        if a == "q":
+            break
+        b = int(input("Enter the second positive integer: "))
 
+        # Calculate the GCD
+        result = GCDCalculator.get_GCD(a, b)
+        print(f"The GCD of {a} and {b} is: {result}")
 
-# Example usage
-gcd_calculator = GCDCalculator()
-
-# Calculate the GCD of 24 and 18
-result = gcd_calculator.get_GCD(24, 18)
-print(f"The GCD of 24 and 18 is: {result}")  # Output: The GCD of 24 and 18 is: 6
-
-# Calculate the GCD of 35 and 21
-result = gcd_calculator.get_GCD(35, 21)
-print(f"The GCD of 35 and 21 is: {result}")
+    except ValueError:
+        print("Invalid input. Please enter positive integers only.")
+        continue
