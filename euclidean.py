@@ -12,7 +12,7 @@ class GCDCalculator:
     @staticmethod
     def get_GCD( a: int, b: int):
         """
-        Calculate the GCD of two positive integers using the Euclidean Algorithm.
+        Calculate the GCD of two integers using the Euclidean Algorithm.
 
         Args:
             a (int): The first positive integer.
@@ -22,11 +22,11 @@ class GCDCalculator:
             int: The GCD of a and b.
 
         Raises:
-            ValueError: If either a or b is not a positive integer.
+            ValueError: If either a or b is not an integer.
         """
-        # Check if a and b are positive integers
-        if a < 0 or b < 0:
-            raise ValueError("Both inputs must be positive integers.")
+        # Check if a and b are integers
+        if not (isinstance(a, int) and isinstance(b, int)):
+            raise ValueError("Both inputs must be integers.")
 
         # If the second number is 0, the GCD is the first number.
         if b == 0:
@@ -42,15 +42,15 @@ class GCDCalculator:
 while True:
     try:
         # Ask the user for input
-        a = int(input("Enter the first positive integer (or 'q' to quit): "))
+        a = (input("Enter the first positive integer (or 'q' to quit): "))
         if a == "q":
             break
-        b = int(input("Enter the second positive integer: "))
+        b = (input("Enter the second positive integer: "))
 
         # Calculate the GCD
-        result = GCDCalculator.get_GCD(a, b)
+        result = GCDCalculator.get_GCD(int(a), int(b))
         print(f"The GCD of {a} and {b} is: {result}")
 
     except ValueError:
-        print("Invalid input. Please enter positive integers only.")
+        print("Invalid input. Please enter integers only.")
         continue
